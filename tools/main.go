@@ -17,13 +17,19 @@ var flags struct {
 func main() {
 	cmd := flag.NewFlagSet("generate", flag.ExitOnError)
 
-	args := cmd.Args()
-	run(args)
+	args := cmd.String("file", "", "File Name")
+	if len(os.Args) < 2 {
+		fmt.Println("expected 'generate' subcommand")
+		os.Exit(1)
+	}
+
+	Run(cmd, args)
 
 }
 
-func run(args []string) {
-	api := readFile(args[0])
+func Run(cmd *flag.FlagSet, args *string) {
+	cmd.Parse(os.Args[2:])
+	api := readFile(args)
 	tapi := convert(api)
 	w := new(bytes.Buffer)
 	check(Go.Execute(w, tapi))
@@ -35,8 +41,10 @@ func fatalf(format string, args ...interface{}) {
 	os.Exit(1)
 }
 
-func readFile(file string) API {
-	f, err := os.Open(file)
+func readFile(file *string) API {
+	fil := *file
+	fmt.Print("File " + fil)
+	f, err := os.Open(fil)
 	check(err)
 	defer f.Close()
 

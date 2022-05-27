@@ -1,0 +1,14 @@
+{
+    "API": [{ "Method": [{
+        "Kind": "name",
+    "Description":  "string",
+    "Deprecated":   "string",
+    "Experimental": false,
+    "RPC":          "string",
+    "Input":        "string",
+    "Output":       "string",
+    "Call":         "string",
+    "CallParams":["test"],
+    "Validate":["test"]
+    }]}]
+}

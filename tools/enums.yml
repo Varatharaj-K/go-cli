@@ -1,0 +1,8 @@
+Query:
+    Description: queries an account or account chain by URL
+    Kind: query
+    rpc: query
+    input: GeneralQuery
+    output: ChainQueryResponse|TransactionQueryResponse|MultiResponse
+    call: QueryUrl
+    call-params: [Url, QueryOptions]
